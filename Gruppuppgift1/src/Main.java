@@ -7,6 +7,8 @@ public class Main {
 		System.out.println("Test push");
 		System.out.println("Tror jag fått till det");
 		System.out.println("Det funkar bra! Fick ned din kod! :)");
+		
+		//Test commit från David B.
 	}
 
 }
