@@ -1,5 +1,6 @@
 package com.grupp4a.tictactoe;
 
+import com.grupp4a.tictactoe.Player.PlayerMap;
 
 public class Board {
 	
@@ -26,5 +27,29 @@ public class Board {
 			System.out.println((row != 2) ? "\n -----------" : "");
 		}		
 	}
+	
+	//Metod som konverterar players input (1-9) till plats i boardArray 
+	public void convertInputToArrayIndex(int placeSquare, PlayerMap player) {
+		
+	}
+	
+	//TODO Metod som kollar om rutan där spelaren vill lägga är tom
+	public void denyConfirmPlacedSymbol(PlayerMap player) {
+		//Om ruta är ledig, anropa updateBoardArray
+	}
+	
+	//TODO Metod som lägger in spelarens symbol i boardArray
+	private void updateBoardArray(PlayerMap player) {
+		
+	}
+	
+	//TODO Metod som kollar om spelaren har vunnit
+	public PlayerMap checkWinner(PlayerMap player, Player.Symbol symbol) {
+			
+		//TODO kolla om symbolen finns horizontally, vertically eller across (Olika metoder?)
+		
+		return player;//Behövs det läggas till en boolean winner i PlayerMap? Isf kan man sätta den till true om den vunnit
+	}
+	
 	
 }
