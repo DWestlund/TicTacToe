@@ -5,7 +5,6 @@ import java.util.HashSet;
 import com.grupp4a.tictactoe.Player.PlayerMap;
 
 public class Board {
-	
 	private char[][] boardArray = {{'1','2','3'}, {'4','5','6'}, {'7','8','9'}};
 	private HashSet<Character> playedSquares = new HashSet<Character>();
 	
