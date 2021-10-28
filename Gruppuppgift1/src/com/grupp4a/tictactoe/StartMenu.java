@@ -3,6 +3,7 @@ package com.grupp4a.tictactoe;
 import java.io.*;
 import java.util.Scanner;
 
+
 public class StartMenu {
 
 	public static void startMenu() {
@@ -17,14 +18,14 @@ public class StartMenu {
 		switch (answer) {
 
 		case 1:
-			Main.initializeGame(scanner);
+			Main.initializeGame();
 			break;
 		// case 2: PlayerVSComputer; break;
 		case 3:
 			howToPlay(scanner);
 			break;
 		case 4:
-			Main.endGame();
+			System.out.println("Game is closed");
 			break;
 		default:
 			System.out.println("Not a valid answer");
@@ -35,10 +36,8 @@ public class StartMenu {
 	}
 
 	private static void howToPlay(Scanner scanner) {
-		
-		//TODO Fixa while eller if för stt kunna gå tillbaka till startMenu
-		
-		//Läser från textfil med spelreglerna
+
+		// Läser från textfil med spelreglerna
 		try {
 			FileReader fil = new FileReader("TicTacToeRules.txt");
 
@@ -53,7 +52,7 @@ public class StartMenu {
 				}
 
 				System.out.println(row);
-				System.out.println();
+				//System.out.println();
 
 			}
 			rules.close();
@@ -64,24 +63,27 @@ public class StartMenu {
 			System.out.println("Error!!!!");
 			e.printStackTrace();
 		}
+	
+		backToMenu(scanner);
+	}
 
+	private static void backToMenu(Scanner scanner) {
+		System.out.println(" Back to [M]enu? \n [Press M + Enter]");
+			
+		String answer = scanner.next().toLowerCase();
 		
-		
-		System.out.println("Back to menu? \nY/N");
-		String answer = "n";
-		answer = scanner.next().toLowerCase();
+		//Loopar så att man kan skriva in fel 10gånger
+		for (int i = 0; i<=10; i++) {
+		if(answer.equals("m")) {
+			
+			StartMenu.startMenu();
+		}
+		else {
+			System.out.println(" Not a valid answer");
+		}
+		 	answer = scanner.next().toLowerCase();
 
-			if (answer == "y") {
-				startMenu();
-			}
-
-//		if(answer == "y") {
-//			startMenu();
-//		}
-//		else if(answer == "n") {
-//			break;
-//		}
-//		else System.out.println("Not a valid answer");
+		}
 	}
 
 }
