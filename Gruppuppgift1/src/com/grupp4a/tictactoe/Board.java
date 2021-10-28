@@ -96,12 +96,66 @@ public class Board {
 	}
 		
 	//TODO Metod som kollar om spelaren har vunnit
-	public PlayerMap checkWinner(PlayerMap player, Player.Symbol symbol) {
-			
-		//TODO kolla om symbolen finns horizontally, vertically eller across (Olika metoder?)
+	public  PlayerMap checkWinner(PlayerMap player, Player.Symbol symbol) {
+		
+		if (boardArray[0][0]=='X'&& boardArray[0][1]=='X' && boardArray[0][2]=='X') {//Kollar om symbolen finns horizontellt
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[0][0]=='O'&& boardArray[0][1]=='O' && boardArray[0][2]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[1][0]=='X'&& boardArray[1][1]=='X' && boardArray[1][2]=='X') {
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[1][0]=='O'&& boardArray[1][1]=='O' && boardArray[1][2]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[2][0]=='X'&& boardArray[2][1]=='X' && boardArray[2][2]=='X') {
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[2][0]=='O'&& boardArray[2][1]=='O' && boardArray[2][2]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[0][0]=='X'&& boardArray[1][0]=='X' && boardArray[2][0]=='X') {//Kollar om symbolen finns vertikalt
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[0][0]=='O'&& boardArray[1][0]=='O' && boardArray[2][0]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[0][1]=='X'&& boardArray[1][1]=='X' && boardArray[2][1]=='X') {
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[0][1]=='O'&& boardArray[1][1]=='O' && boardArray[2][1]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[0][2]=='X'&& boardArray[1][2]=='X' && boardArray[2][2]=='X') {
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[0][2]=='O'&& boardArray[1][2]=='O' && boardArray[2][2]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[0][0]=='X'&& boardArray[1][1]=='X' && boardArray[2][2]=='X') {//Kollar om symbolen finns diagonalt
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[0][0]=='O'&& boardArray[1][1]=='O' && boardArray[2][2]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[2][0]=='X'&& boardArray[2][1]=='X' && boardArray[0][2]=='X') {
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[1][0]=='O'&& boardArray[1][1]=='O' && boardArray[1][2]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		}
+		if (boardArray[2][0]=='X'&& boardArray[1][1]=='X' && boardArray[2][2]=='X') {
+			System.out.println("Spelare"+Player.Symbol.X +" vinner.");
+		}
+		if (boardArray[2][0]=='O'&& boardArray[1][1]=='O' && boardArray[2][2]=='O') {
+			System.out.println("Spelare"+Player.Symbol.O +" vinner.");
+		//TODO  kontrolera sant/falskt, oavgjort samt poängräknare
 		
 		return player;//Behövs det läggas till en boolean winner i PlayerMap? Isf kan man sätta den till true om den vunnit
 	}
 	
 	
-}
+	}
+	}
