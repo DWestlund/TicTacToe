@@ -24,7 +24,7 @@ public class Main {
 		// TODO skapa en snyggare Menu än detta.
 		// TODO fundering.. Att välja så man kan spela mot en 'Dator' också?
 		
-		board = new Board();
+		board = newGameBoard();
 		
 		System.out.println("Välkommen till TicTacToe skapat av Grupp-4A.");
 		System.out.println("Vänligen ange namn på Spelare 1: ");
@@ -55,18 +55,26 @@ public class Main {
 		board.printBoard(board);
 	}
 	
-	public static void runGame(Scanner scanner) {
-		PlayerMap winner = board.checkWinner(selectedPlayer);
-		if(winner == null) {
-			board.addPlayerMove(board, selectedPlayer);
-			board.printBoard(board);
-			setNewPlayerTurn();
-		} else {
-			System.out.println(winner.getName() + " är vinnare!");
-			winner.setScore(winner.getScore() + 1);
-			currentBestOf++;
-			// TODO reset board
-		}
+	public static Board newGameBoard() {
+		Board board = new Board();	
+		return board;
+	}
+	
+	public static void runGame(Scanner scanner) {		
+		do {
+			PlayerMap winner = board.checkWinner(selectedPlayer);
+			if(winner == null) {
+				board.addPlayerMove(board, selectedPlayer);
+				board.printBoard(board);
+				setNewPlayerTurn();
+			} else {
+				System.out.println(winner.getName() + " är vinnare!");
+				winner.setScore(winner.getScore() + 1);
+				currentBestOf++;
+				board = newGameBoard();
+				board.printBoard(board);
+			}		
+		} while(!Main.endGame());
 	}
 	
 	private static void setNewPlayerTurn() {

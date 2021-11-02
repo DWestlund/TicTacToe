@@ -3,7 +3,6 @@ package com.grupp4a.tictactoe;
 import java.io.*;
 import java.util.Scanner;
 
-
 public class StartMenu {
 
 	public static void startMenu() {
@@ -19,9 +18,7 @@ public class StartMenu {
 
 		case 1:
 			Main.initializeGame();
-			do {
-				Main.runGame(scanner);
-			} while(!Main.endGame());
+			Main.runGame(scanner);
 			break;
 		// case 2: PlayerVSComputer; break;
 		case 3:
@@ -55,7 +52,6 @@ public class StartMenu {
 				}
 
 				System.out.println(row);
-				//System.out.println();
 
 			}
 			rules.close();
@@ -66,25 +62,22 @@ public class StartMenu {
 			System.out.println("Error!!!!");
 			e.printStackTrace();
 		}
-	
 		backToMenu(scanner);
 	}
 
 	private static void backToMenu(Scanner scanner) {
 		System.out.println(" Back to [M]enu? \n [Press M + Enter]");
-			
+
 		String answer = scanner.next().toLowerCase();
-		
-		//Loopar så att man kan skriva in fel 10gånger
-		for (int i = 0; i<=10; i++) {
-		if(answer.equals("m")) {
-			
-			StartMenu.startMenu();
-		}
-		else {
-			System.out.println(" Not a valid answer");
-		}
-		 	answer = scanner.next().toLowerCase();
+
+		// Loopar så att man kan skriva in fel 10gånger
+		for (int i = 0; i <= 10; i++) {
+			if (answer.equals("m")) {
+				StartMenu.startMenu();
+			} else {
+				System.out.println(" Not a valid answer");
+			}
+			answer = scanner.next().toLowerCase();
 
 		}
 	}

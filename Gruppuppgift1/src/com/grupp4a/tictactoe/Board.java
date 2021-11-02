@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 import com.grupp4a.tictactoe.Player.PlayerMap;
-import com.grupp4a.tictactoe.Player.Symbol;
 
 public class Board {
 	private char[][] boardArray = { { '1', '2', '3' }, { '4', '5', '6' }, { '7', '8', '9' } };
@@ -172,6 +171,11 @@ public class Board {
 		}
 		if(hasWon) {
 			winnerPlayer = selectedPlayer;
+		} else if (!hasWon && getPlayedSquares().size() >= 9) {
+			System.out.println("Oavgjort spel!!!");
+			Main.board = Main.newGameBoard();
+			Main.board.printBoard(Main.board);
+			
 		}
 		return winnerPlayer;// Behövs det läggas till en boolean winner i PlayerMap? Isf kan man sätta den
 		// till true om den vunnit
