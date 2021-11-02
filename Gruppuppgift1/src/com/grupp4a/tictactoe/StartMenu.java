@@ -18,7 +18,10 @@ public class StartMenu {
 		switch (answer) {
 
 		case 1:
-			Main.initializeGame(scanner);
+			Main.initializeGame();
+			do {
+				Main.runGame(scanner);
+			} while(!Main.endGame());
 			break;
 		// case 2: PlayerVSComputer; break;
 		case 3:

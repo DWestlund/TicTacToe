@@ -1,6 +1,7 @@
 package com.grupp4a.tictactoe;
 
 import java.util.HashSet;
+import java.util.Scanner;
 
 import com.grupp4a.tictactoe.Player.PlayerMap;
 
@@ -36,8 +37,10 @@ public class Board {
 	}
 
 	// Metod som anropas när en spelares drag ska läggas till
-	public boolean addPlayerMove(int squareNr, PlayerMap player, Board board) {
+	public boolean addPlayerMove(Board board, PlayerMap selectedPlayer) {
 		boolean moveOK = false;// Måste vara true genom hela metoden för att draget ska accepteras
+		
+		int squareNr = getPlayerInput();//User input
 
 		moveOK = checkInputInRange(squareNr);// input 1-9
 
@@ -45,13 +48,23 @@ public class Board {
 			moveOK = board.setPlayedSquares(playedSquares, squareNr);// Testar lägga till i HashSet
 			if (moveOK == true) {
 				int[] playedIndex = toBoardArrayIndex(squareNr);// Konv till boardArrIndex
-				char playerSymbol = (player.getSymbol() == Player.Symbol.X) ? 'X' : 'O';// Hämtar spelarens symbol
+				char playerSymbol = (selectedPlayer.getSymbol() == Player.Symbol.X) ? 'X' : 'O';// Hämtar spelarens symbol
 
 				char[][] updBoardArray = board.getBoardArray();
 				updBoardArray[playedIndex[0]][playedIndex[1]] = playerSymbol;// Lägger till spelarens symbol i
 																				// tillfällig boardArr
-
 				board.setBoardArray(updBoardArray);// Uppdaterar boardArray
+				
+				
+				PlayerMap playerA = Main.player.getPlayers().get(0);
+                PlayerMap playerB = Main.player.getPlayers().get(1);
+
+                if(Main.selectedPlayer.equals(playerA)) {
+                    Main.selectedPlayer = playerB;
+                } else if(Main.selectedPlayer.equals(playerB)) {
+                    Main.selectedPlayer = playerA;
+                }
+							
 			} else {
 				System.out.println("Rutan är redan spelad...");
 			}
@@ -59,6 +72,15 @@ public class Board {
 			System.out.println("Spelplanen är mellan 1-9...");
 		}
 		return moveOK;
+	}
+
+	private int getPlayerInput() {
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.print("Ditt nummer:");
+		int usrIn = scanner.nextInt();
+		
+		return usrIn;
 	}
 
 	// Metod som konverterar players input (1-9) till plats i boardArray
@@ -99,7 +121,7 @@ public class Board {
 	}
 
 	// TODO Metod som kollar om spelaren har vunnit
-	public PlayerMap checkWinner(PlayerMap player, Player.Symbol symbol) {
+	public PlayerMap checkWinner(PlayerMap player) {
 
 		if (boardArray[0][0] == 'X' && boardArray[0][1] == 'X' && boardArray[0][2] == 'X') {// Kollar om symbolen finns
 																							// horizontellt

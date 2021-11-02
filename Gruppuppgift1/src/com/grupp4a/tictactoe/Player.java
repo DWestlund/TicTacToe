@@ -15,6 +15,7 @@ public class Player {
 		private String name;
 		private Symbol symbol;
 		private int score;
+/////////////////////
 		
 		public PlayerMap(String name, Symbol symbol) {
 			this.name = name;
