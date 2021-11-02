@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.grupp4a.tictactoe.Player.PlayerMap;
 import com.grupp4a.tictactoe.Player.Symbol;
 
+
 public class Main {
 	
 	public static Player player = new Player();
@@ -68,9 +69,18 @@ public class Main {
 				board.printBoard(board);
 				setNewPlayerTurn();
 			} else {
-				System.out.println(winner.getName() + " är vinnare!");
+				System.out.println(winner.getName() + " är vinnare!\n");
 				winner.setScore(winner.getScore() + 1);
+				
+				PlayerMap playerOne = player.getPlayers().get(0);
+				PlayerMap playerTwo = player.getPlayers().get(1);
+				
 				currentBestOf++;
+				
+				System.out.println( "Score:\n" + playerOne.getName() + "| " + playerOne.getScore() + "  -  " + playerTwo.getScore() + " |" + playerTwo.getName());
+				System.out.println("\nRunda: " + currentBestOf + " av " + decidedBestOf + "\n");
+				
+				
 				board = newGameBoard();
 				board.printBoard(board);
 			}		
