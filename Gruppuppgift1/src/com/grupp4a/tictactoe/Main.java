@@ -56,10 +56,28 @@ public class Main {
 	}
 	
 	public static void runGame(Scanner scanner) {
-		board.addPlayerMove(board, selectedPlayer);
-		board.printBoard(board);
-		board.checkWinner(selectedPlayer);
-		
+		PlayerMap winner = board.checkWinner(selectedPlayer);
+		if(winner == null) {
+			board.addPlayerMove(board, selectedPlayer);
+			board.printBoard(board);
+			setNewPlayerTurn();
+		} else {
+			System.out.println(winner.getName() + " är vinnare!");
+			winner.setScore(winner.getScore() + 1);
+			currentBestOf++;
+			// TODO reset board
+		}
+	}
+	
+	private static void setNewPlayerTurn() {
+		PlayerMap playerA = player.getPlayers().get(0);
+        PlayerMap playerB = player.getPlayers().get(1);
+
+        if(selectedPlayer.equals(playerA)) {
+            selectedPlayer = playerB;
+        } else if(selectedPlayer.equals(playerB)) {
+            selectedPlayer = playerA;
+        }
 	}
 	
 	private static void addPlayers(String playerA, String playerB) {

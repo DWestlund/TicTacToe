@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 import com.grupp4a.tictactoe.Player.PlayerMap;
+import com.grupp4a.tictactoe.Player.Symbol;
 
 public class Board {
 	private char[][] boardArray = { { '1', '2', '3' }, { '4', '5', '6' }, { '7', '8', '9' } };
@@ -54,17 +55,6 @@ public class Board {
 				updBoardArray[playedIndex[0]][playedIndex[1]] = playerSymbol;// Lägger till spelarens symbol i
 																				// tillfällig boardArr
 				board.setBoardArray(updBoardArray);// Uppdaterar boardArray
-				
-				
-				PlayerMap playerA = Main.player.getPlayers().get(0);
-                PlayerMap playerB = Main.player.getPlayers().get(1);
-
-                if(Main.selectedPlayer.equals(playerA)) {
-                    Main.selectedPlayer = playerB;
-                } else if(Main.selectedPlayer.equals(playerB)) {
-                    Main.selectedPlayer = playerA;
-                }
-							
 			} else {
 				System.out.println("Rutan är redan spelad...");
 			}
@@ -121,67 +111,69 @@ public class Board {
 	}
 
 	// TODO Metod som kollar om spelaren har vunnit
-	public PlayerMap checkWinner(PlayerMap player) {
-
-		if (boardArray[0][0] == 'X' && boardArray[0][1] == 'X' && boardArray[0][2] == 'X') {// Kollar om symbolen finns
-																							// horizontellt
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+	public PlayerMap checkWinner(PlayerMap selectedPlayer) {
+		boolean hasWon = false;
+		PlayerMap winnerPlayer = null;
+		
+		if (boardArray[0][0] == 'X' && boardArray[0][1] == 'X' && boardArray[0][2] == 'X') {// Kollar om symbolen finns horizontellt
+			hasWon = true;
 		}
 		if (boardArray[0][0] == 'O' && boardArray[0][1] == 'O' && boardArray[0][2] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[1][0] == 'X' && boardArray[1][1] == 'X' && boardArray[1][2] == 'X') {
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[1][0] == 'O' && boardArray[1][1] == 'O' && boardArray[1][2] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[2][0] == 'X' && boardArray[2][1] == 'X' && boardArray[2][2] == 'X') {
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[2][0] == 'O' && boardArray[2][1] == 'O' && boardArray[2][2] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
-		if (boardArray[0][0] == 'X' && boardArray[1][0] == 'X' && boardArray[2][0] == 'X') {// Kollar om symbolen finns
-																							// vertikalt
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+		if (boardArray[0][0] == 'X' && boardArray[1][0] == 'X' && boardArray[2][0] == 'X') {// Kollar om symbolen finns vertikalt
+			hasWon = true;
 		}
 		if (boardArray[0][0] == 'O' && boardArray[1][0] == 'O' && boardArray[2][0] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[0][1] == 'X' && boardArray[1][1] == 'X' && boardArray[2][1] == 'X') {
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[0][1] == 'O' && boardArray[1][1] == 'O' && boardArray[2][1] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[0][2] == 'X' && boardArray[1][2] == 'X' && boardArray[2][2] == 'X') {
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[0][2] == 'O' && boardArray[1][2] == 'O' && boardArray[2][2] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
-		if (boardArray[0][0] == 'X' && boardArray[1][1] == 'X' && boardArray[2][2] == 'X') {// Kollar om symbolen finns
-																							// diagonalt
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+		if (boardArray[0][0] == 'X' && boardArray[1][1] == 'X' && boardArray[2][2] == 'X') {// Kollar om symbolen finns diagonalt
+			hasWon = true;
 		}
 		if (boardArray[0][0] == 'O' && boardArray[1][1] == 'O' && boardArray[2][2] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[2][0] == 'X' && boardArray[2][1] == 'X' && boardArray[0][2] == 'X') {
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[1][0] == 'O' && boardArray[1][1] == 'O' && boardArray[1][2] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[2][0] == 'X' && boardArray[1][1] == 'X' && boardArray[2][2] == 'X') {
-			System.out.println("Spelare" + Player.Symbol.X + " vinner.");
+			hasWon = true;
 		}
 		if (boardArray[2][0] == 'O' && boardArray[1][1] == 'O' && boardArray[2][2] == 'O') {
-			System.out.println("Spelare" + Player.Symbol.O + " vinner.");
+			hasWon = true;
 			// TODO kontrolera sant/falskt, oavgjort samt poängräknare
-		}		
-		return player;// Behövs det läggas till en boolean winner i PlayerMap? Isf kan man sätta den
+		}
+		if(hasWon) {
+			winnerPlayer = selectedPlayer;
+		}
+		return winnerPlayer;// Behövs det läggas till en boolean winner i PlayerMap? Isf kan man sätta den
 		// till true om den vunnit
 	}
 }
