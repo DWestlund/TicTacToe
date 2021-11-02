@@ -8,23 +8,29 @@ import com.grupp4a.tictactoe.Player.Symbol;
 
 public class Main {
 	
-	public static Player player = new Player();
-	////
+	private static Player player = new Player();
+	
 	public static int currentBestOf;
 	public static int decidedBestOf;
-	public static PlayerMap selectedPlayer;
-	static Board board;
 
-	public static void main(String[] args) {		
-		StartMenu.startMenu();
+	public static void main(String[] args) {
+		try(Scanner scanner = new Scanner(System.in)) {
+			
+			initializeGame(scanner);
+			do {
+				runGame(scanner);
+			}
+			while(!endGame());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	public static void initializeGame() {
-		Scanner scanner = new Scanner(System.in);
+	
+	private static void initializeGame(Scanner scanner) {
 		// TODO Fel-hantering.
 		// TODO skapa en snyggare Menu än detta.
 		// TODO fundering.. Att välja så man kan spela mot en 'Dator' också?
-		
-		board = new Board();
 		
 		System.out.println("Välkommen till TicTacToe skapat av Grupp-4A.");
 		System.out.println("Vänligen ange namn på Spelare 1: ");
@@ -43,22 +49,16 @@ public class Main {
 		
 		// Spelaren med symbol X ska starta
 		if(playerOne.getSymbol() == Player.Symbol.X) {
-			selectedPlayer = playerOne;
 			System.out.println("Spelare: " + playerOne.getName() + " - startar spelet med X!");
 		} else if(playerTwo.getSymbol() == Player.Symbol.X) {
-			selectedPlayer = playerTwo;
 			System.out.println("Spelare: " + playerTwo.getName() + " - startar spelet med X!");
 		}
 		currentBestOf++;
 		System.out.println("---Runda " + currentBestOf + "---");
-		
-		board.printBoard(board);
 	}
 	
-	public static void runGame(Scanner scanner) {
-		board.addPlayerMove(board, selectedPlayer);
-		board.printBoard(board);
-		board.checkWinner(selectedPlayer);
+	private static void runGame(Scanner scanner) {
+		// Kör spelets funktioner (Board).
 		
 	}
 	
@@ -76,7 +76,7 @@ public class Main {
 		}
 	}
 	
-	public static boolean endGame() {
+	private static boolean endGame() {
 		// Returnerar ifall vi ska avsluta spelet?
 		if(currentBestOf > decidedBestOf) {
 			return true;
