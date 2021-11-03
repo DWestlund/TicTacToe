@@ -27,6 +27,7 @@ public class StartMenu {
 					break;
 				case 4:
 					System.out.println("Avslutar Programmet...");
+					
 					break;
 				default:
 					System.out.println("Välj ett val ur menyn...");
@@ -73,7 +74,7 @@ public class StartMenu {
 		backToMenu(scanner);
 	}
 
-	private static void backToMenu(Scanner scanner) {
+	static void backToMenu(Scanner scanner) {
 		System.out.println(" Tillbaka till [M]enyn? \n [Tryck M + Enter]");
 
 		String answer = scanner.next().toLowerCase();

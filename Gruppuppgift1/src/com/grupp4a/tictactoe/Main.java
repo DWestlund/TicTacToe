@@ -60,31 +60,57 @@ public class Main {
 		return board;
 	}
 	
-	public static void runGame(Scanner scanner) {		
+	public static void runGame(Scanner scanner) {	
+		PlayerMap winner = null;					
+		PlayerMap playerOne = player.getPlayers().get(0);
+		PlayerMap playerTwo = player.getPlayers().get(1);
 		do {
-			PlayerMap winner = board.checkWinner(selectedPlayer);
+	
 			if(winner == null) {
 				boolean moveOK = board.addPlayerMove(board, selectedPlayer);
 				board.printBoard(board);
 				if(moveOK)
+					winner = board.checkWinner(selectedPlayer);
+					
 					setNewPlayerTurn();
-			} else {
+			} else if (currentBestOf < decidedBestOf) {
 				System.out.println(winner.getName() + " är vinnare!\n");
 				winner.setScore(winner.getScore() + 1);
-				
-				PlayerMap playerOne = player.getPlayers().get(0);
-				PlayerMap playerTwo = player.getPlayers().get(1);
-				
+
 				currentBestOf++;
 				
 				System.out.println( "Poäng:\n" + playerOne.getName() + "| " + playerOne.getScore() + "  -  " + playerTwo.getScore() + " |" + playerTwo.getName());
 				System.out.println("\nRunda: " + currentBestOf + " av " + decidedBestOf + "\n");
-				
+				winner = null;
 				
 				board = newGameBoard();
 				board.printBoard(board);
-			}		
+			}
+			
+			else {
+				winner.setScore(winner.getScore() + 1);
+				System.out.println( "Poäng:\n" + playerOne.getName() + "| " + playerOne.getScore() + "  -  " + playerTwo.getScore() + " |" + playerTwo.getName());
+				System.out.println("-----------------");
+				if(playerOne.getScore() < playerTwo.getScore()) {
+				
+				System.out.println("\nVinnaren är " + playerTwo.getName() + "!!!");
+				break;
+				}
+				else if(playerOne.getScore() > playerTwo.getScore()) {
+					
+					System.out.println("\nVinnaren är " + playerOne.getName() + "!!!");
+					break;
+				}
+				else if(playerOne.getScore() == playerTwo.getScore()) {
+					
+					System.out.println("\nDet blev oavgjort!");
+					break;
+				}
+			}
 		} while(!Main.endGame());
+		
+		System.out.println("\nSpelet avslutat\n");
+		StartMenu.backToMenu(scanner);
 	}
 	
 	private static void setNewPlayerTurn() {
