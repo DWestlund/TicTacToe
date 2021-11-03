@@ -8,19 +8,18 @@ import com.grupp4a.tictactoe.Player.Symbol;
 
 
 public class Main {
-	
+	private static Scanner scanner = new Scanner(System.in);
 	public static Player player = new Player();
 	////
 	public static int currentBestOf;
 	public static int decidedBestOf;
 	public static PlayerMap selectedPlayer;
-	static Board board;
+	static GameBoard board;
 
 	public static void main(String[] args) {		
 		StartMenu.startMenu();
 	}
 	public static void initializeGame() {
-		Scanner scanner = new Scanner(System.in);
 		// TODO Fel-hantering.
 		// TODO skapa en snyggare Menu än detta.
 		// TODO fundering.. Att välja så man kan spela mot en 'Dator' också?
@@ -28,19 +27,19 @@ public class Main {
 		board = newGameBoard();
 		
 		System.out.println("Välkommen till TicTacToe skapat av Grupp-4A.");
-		System.out.println("Vänligen ange namn på Spelare 1: ");
+		System.out.print("Vänligen ange namn på Spelare 1: ");
 		String playerNameA = scanner.nextLine();
-		System.out.println("Vänligen ange namn på Spelare 2: ");
+		System.out.print("Vänligen ange namn på Spelare 2: ");
 		String playerNameB = scanner.nextLine();
 		
 		addPlayers(playerNameA, playerNameB);
 		PlayerMap playerOne = player.getPlayers().get(0);
 		PlayerMap playerTwo = player.getPlayers().get(1);
 		
-		System.out.println("Vänligen ange 'Bäst av': ");
+		System.out.print("Vänligen ange 'Bäst av': ");
 		decidedBestOf = scanner.nextInt();
 		
-		System.out.println("---TicTacToe bäst av: " + decidedBestOf + " (" + playerOne.getName() + " vs " + playerTwo.getName() + ")---");
+		System.out.println("\n---TicTacToe bäst av: " + decidedBestOf + " (" + playerOne.getName() + " vs " + playerTwo.getName() + ")---");
 		
 		// Spelaren med symbol X ska starta
 		if(playerOne.getSymbol() == Player.Symbol.X) {
@@ -56,8 +55,8 @@ public class Main {
 		board.printBoard(board);
 	}
 	
-	public static Board newGameBoard() {
-		Board board = new Board();	
+	public static GameBoard newGameBoard() {
+		GameBoard board = new GameBoard();	
 		return board;
 	}
 	
@@ -65,9 +64,10 @@ public class Main {
 		do {
 			PlayerMap winner = board.checkWinner(selectedPlayer);
 			if(winner == null) {
-				board.addPlayerMove(board, selectedPlayer);
+				boolean moveOK = board.addPlayerMove(board, selectedPlayer);
 				board.printBoard(board);
-				setNewPlayerTurn();
+				if(moveOK)
+					setNewPlayerTurn();
 			} else {
 				System.out.println(winner.getName() + " är vinnare!\n");
 				winner.setScore(winner.getScore() + 1);
@@ -77,7 +77,7 @@ public class Main {
 				
 				currentBestOf++;
 				
-				System.out.println( "Score:\n" + playerOne.getName() + "| " + playerOne.getScore() + "  -  " + playerTwo.getScore() + " |" + playerTwo.getName());
+				System.out.println( "Poäng:\n" + playerOne.getName() + "| " + playerOne.getScore() + "  -  " + playerTwo.getScore() + " |" + playerTwo.getName());
 				System.out.println("\nRunda: " + currentBestOf + " av " + decidedBestOf + "\n");
 				
 				

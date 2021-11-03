@@ -9,8 +9,8 @@ public class StartMenu {
 
 		Scanner scanner = new Scanner(System.in);
 
-		System.out.println(
-				"    Tic Tac Toe \n[1] Player VS Player \n[2] Player VS Computer " + "\n[3] How to play \n[4] End");
+		System.out.print(
+				"    Tic Tac Toe \n[1] Spelare VS Spelare \n[2] Spelare VS Dator " + "\n[3] Läs regelbok \n[4] Avsluta program\n>>> ");
 
 		int answer = scanner.nextInt();
 
@@ -25,10 +25,10 @@ public class StartMenu {
 			howToPlay(scanner);
 			break;
 		case 4:
-			System.out.println("Game is closed");
+			System.out.println("Avslutar Programmet...");
 			break;
 		default:
-			System.out.println("Not a valid answer");
+			System.out.println("Välj ett val ur menyn...");
 			break;
 
 		}
@@ -56,7 +56,7 @@ public class StartMenu {
 			}
 			rules.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Sorry! \nCouldn't find the rules");
+			System.out.println("Kunde inte hitta regelboken");
 			e.printStackTrace();
 		} catch (IOException e) {
 			System.out.println("Error!!!!");
@@ -66,7 +66,7 @@ public class StartMenu {
 	}
 
 	private static void backToMenu(Scanner scanner) {
-		System.out.println(" Back to [M]enu? \n [Press M + Enter]");
+		System.out.println(" Tillbaka till [M]enyn? \n [Tryck M + Enter]");
 
 		String answer = scanner.next().toLowerCase();
 
@@ -75,7 +75,7 @@ public class StartMenu {
 			if (answer.equals("m")) {
 				StartMenu.startMenu();
 			} else {
-				System.out.println(" Not a valid answer");
+				System.out.println(" Inte ett giltigt svar");
 			}
 			answer = scanner.next().toLowerCase();
 
