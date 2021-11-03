@@ -1,38 +1,46 @@
 package com.grupp4a.tictactoe;
 
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StartMenu {
 
 	public static void startMenu() {
-
 		Scanner scanner = new Scanner(System.in);
 
-		System.out.print(
-				"    Tic Tac Toe \n[1] Spelare VS Spelare \n[2] Spelare VS Dator " + "\n[3] Läs regelbok \n[4] Avsluta program\n>>> ");
+		while (true) {
+			System.out.print("    Tic Tac Toe \n" + "[1] Spelare VS Spelare" + "\n[2] Spelare VS Dator "
+					+ "\n[3] Läs regelbok" + "\n[4] Avsluta program\n>>> ");
+			try {
+				int answer = scanner.nextInt();
 
-		int answer = scanner.nextInt();
+				switch (answer) {
 
-		switch (answer) {
+				case 1:
+					Main.initializeGame();
+					Main.runGame(scanner);
+					break;
+				// case 2: PlayerVSComputer; break;
+				case 3:
+					howToPlay(scanner);
+					break;
+				case 4:
+					System.out.println("Avslutar Programmet...");
+					break;
+				default:
+					System.out.println("Välj ett val ur menyn...");
+					break;
 
-		case 1:
-			Main.initializeGame();
-			Main.runGame(scanner);
-			break;
-		// case 2: PlayerVSComputer; break;
-		case 3:
-			howToPlay(scanner);
-			break;
-		case 4:
-			System.out.println("Avslutar Programmet...");
-			break;
-		default:
-			System.out.println("Välj ett val ur menyn...");
-			break;
-
+				}
+				scanner.close();
+				break;
+			} catch (InputMismatchException e) {
+				System.out.println("Menyn besår endast av siffror...\n");
+				scanner.nextLine();
+			} 
 		}
-		scanner.close();
+		
 	}
 
 	private static void howToPlay(Scanner scanner) {
