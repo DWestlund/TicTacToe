@@ -27,7 +27,7 @@ public class StartMenu {
 					break;
 				case 4:
 					System.out.println("Avslutar Programmet...");
-					
+					System.exit(0);
 					break;
 				default:
 					System.out.println("Välj ett val ur menyn...");
