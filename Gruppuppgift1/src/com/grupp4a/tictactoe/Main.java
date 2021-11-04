@@ -10,7 +10,6 @@ import com.grupp4a.tictactoe.Player.Symbol;
 public class Main {
 	private static Scanner scanner = new Scanner(System.in);
 	public static Player player = new Player();
-	////
 	public static int currentBestOf;
 	public static int decidedBestOf;
 	public static PlayerMap selectedPlayer;

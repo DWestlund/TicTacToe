@@ -1,6 +1,7 @@
 package com.grupp4a.tictactoe;
 
 import java.util.HashSet;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.grupp4a.tictactoe.Player.PlayerMap;
@@ -50,7 +51,7 @@ public class GameBoard {
 
 				char[][] updBoardArray = board.getBoardArray();
 				updBoardArray[playedIndex[0]][playedIndex[1]] = playerSymbol;// Lägger till spelarens symbol i
-																				// tillfällig boardArr
+																			 // tillfällig boardArr
 				board.setBoardArray(updBoardArray);// Uppdaterar boardArray
 			} else {
 				System.out.println("\nRutan är redan spelad...");
@@ -62,9 +63,17 @@ public class GameBoard {
 	}
 	
 	private int getPlayerInput() {
-		System.out.print("Lägg symbol " + Main.selectedPlayer.getSymbol() + " >");
-		int usrIn = scanner.nextInt();
+		int usrIn;
 		
+		while(true) {
+			System.out.print("Lägg symbol " + Main.selectedPlayer.getSymbol() + " >");
+			try{
+				usrIn = scanner.nextInt();
+				break;
+			} catch(InputMismatchException ex) {
+				scanner.nextLine();
+			}
+		}	
 		return usrIn;
 	}
 
