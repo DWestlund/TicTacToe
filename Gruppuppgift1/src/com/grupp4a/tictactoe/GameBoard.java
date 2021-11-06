@@ -3,24 +3,27 @@ package com.grupp4a.tictactoe;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import com.grupp4a.tictactoe.Player.PlayerMap;
 
 public class GameBoard {
 	private static Scanner scanner = new Scanner(System.in);
 	private char[][] boardArray = { { '1', '2', '3' }, { '4', '5', '6' }, { '7', '8', '9' } };
-	private HashSet<Character> playedSquares = new HashSet<Character>();
+	HashSet<Character> playedSquares = new HashSet<Character>();
 
 	public char[][] getBoardArray() {
 		return boardArray;
 	}
+
 	public void setBoardArray(char[][] boardArray) {
 		this.boardArray = boardArray;
 	}
-	
+
 	public HashSet<Character> getPlayedSquares() {
 		return playedSquares;
 	}
+
 	public boolean setPlayedSquares(HashSet<Character> playedSquares, int squareNr) {
 		boolean added = this.playedSquares.add((char) (squareNr + '0'));
 		return added;
@@ -38,8 +41,13 @@ public class GameBoard {
 	// Metod som anropas när en spelares drag ska läggas till
 	public boolean addPlayerMove(GameBoard board, PlayerMap selectedPlayer) {
 		boolean moveOK = false;// Måste vara true genom hela metoden för att draget ska accepteras
-		
-		int squareNr = getPlayerInput();//User input
+		int squareNr = 0;
+
+		if (selectedPlayer.getName().equals("Computer")) {
+			squareNr = Computer.computerNr(playedSquares);
+		} else {
+			squareNr = getPlayerInput();// User input
+		}
 
 		moveOK = checkInputInRange(squareNr);// input 1-9
 
@@ -47,11 +55,12 @@ public class GameBoard {
 			moveOK = board.setPlayedSquares(playedSquares, squareNr);// Testar lägga till i HashSet
 			if (moveOK == true) {
 				int[] playedIndex = toBoardArrayIndex(squareNr);// Konv till boardArrIndex
-				char playerSymbol = (selectedPlayer.getSymbol() == Player.Symbol.X) ? 'X' : 'O';// Hämtar spelarens symbol
+				char playerSymbol = (selectedPlayer.getSymbol() == Player.Symbol.X) ? 'X' : 'O';// Hämtar spelarens
+																								// symbol
 
 				char[][] updBoardArray = board.getBoardArray();
 				updBoardArray[playedIndex[0]][playedIndex[1]] = playerSymbol;// Lägger till spelarens symbol i
-																			 // tillfällig boardArr
+																				// tillfällig boardArr
 				board.setBoardArray(updBoardArray);// Uppdaterar boardArray
 			} else {
 				System.out.println("\nRutan är redan spelad...");
@@ -61,19 +70,19 @@ public class GameBoard {
 		}
 		return moveOK;
 	}
-	
+
 	private int getPlayerInput() {
-		int usrIn;
-		
-		while(true) {
+		int usrIn = 0;
+
+		while (true) {
 			System.out.print("Lägg symbol " + Main.selectedPlayer.getSymbol() + " >");
-			try{
+			try {
 				usrIn = scanner.nextInt();
 				break;
-			} catch(InputMismatchException ex) {
+			} catch (InputMismatchException ex) {
 				scanner.nextLine();
 			}
-		}	
+		}
 		return usrIn;
 	}
 
@@ -118,8 +127,9 @@ public class GameBoard {
 	public PlayerMap checkWinner(PlayerMap selectedPlayer) {
 		boolean hasWon = false;
 		PlayerMap winnerPlayer = null;
-		
-		if (boardArray[0][0] == 'X' && boardArray[0][1] == 'X' && boardArray[0][2] == 'X') {// Kollar om symbolen finns horizontellt
+
+		if (boardArray[0][0] == 'X' && boardArray[0][1] == 'X' && boardArray[0][2] == 'X') {// Kollar om symbolen finns
+																							// horizontellt
 			hasWon = true;
 		}
 		if (boardArray[0][0] == 'O' && boardArray[0][1] == 'O' && boardArray[0][2] == 'O') {
@@ -137,7 +147,8 @@ public class GameBoard {
 		if (boardArray[2][0] == 'O' && boardArray[2][1] == 'O' && boardArray[2][2] == 'O') {
 			hasWon = true;
 		}
-		if (boardArray[0][0] == 'X' && boardArray[1][0] == 'X' && boardArray[2][0] == 'X') {// Kollar om symbolen finns vertikalt
+		if (boardArray[0][0] == 'X' && boardArray[1][0] == 'X' && boardArray[2][0] == 'X') {// Kollar om symbolen finns
+																							// vertikalt
 			hasWon = true;
 		}
 		if (boardArray[0][0] == 'O' && boardArray[1][0] == 'O' && boardArray[2][0] == 'O') {
@@ -155,32 +166,38 @@ public class GameBoard {
 		if (boardArray[0][2] == 'O' && boardArray[1][2] == 'O' && boardArray[2][2] == 'O') {
 			hasWon = true;
 		}
-		if (boardArray[0][0] == 'X' && boardArray[1][1] == 'X' && boardArray[2][2] == 'X') {// Kollar om symbolen finns diagonalt
+		if (boardArray[0][0] == 'X' && boardArray[1][1] == 'X' && boardArray[2][2] == 'X') {// Kollar om symbolen finns
+																							// diagonalt
 			hasWon = true;
 		}
 		if (boardArray[0][0] == 'O' && boardArray[1][1] == 'O' && boardArray[2][2] == 'O') {
 			hasWon = true;
 		}
-		if (boardArray[2][0] == 'X' && boardArray[2][1] == 'X' && boardArray[0][2] == 'X') {
+		if (boardArray[2][0] == 'X' && boardArray[1][1] == 'X' && boardArray[0][2] == 'X') {
 			hasWon = true;
 		}
 		if (boardArray[1][0] == 'O' && boardArray[1][1] == 'O' && boardArray[1][2] == 'O') {
 			hasWon = true;
 		}
-		if (boardArray[2][0] == 'X' && boardArray[1][1] == 'X' && boardArray[2][2] == 'X') {
+		if (boardArray[2][0] == 'X' && boardArray[1][1] == 'X' && boardArray[0][2] == 'X') {
 			hasWon = true;
 		}
-		if (boardArray[2][0] == 'O' && boardArray[1][1] == 'O' && boardArray[2][2] == 'O') {
+		if (boardArray[2][0] == 'O' && boardArray[1][1] == 'O' && boardArray[0][2] == 'O') {
 			hasWon = true;
 			// TODO kontrolera sant/falskt, oavgjort samt poängräknare
 		}
-		if(hasWon) {
+		if (hasWon) {
 			winnerPlayer = selectedPlayer;
 		} else if (!hasWon && getPlayedSquares().size() >= 9) {
 			System.out.println("Rundan slutar oavgjort!");
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			Main.board = Main.newGameBoard();
 			Main.board.printBoard(Main.board);
-			
+
 		}
 		return winnerPlayer;// Behövs det läggas till en boolean winner i PlayerMap? Isf kan man sätta den
 		// till true om den vunnit

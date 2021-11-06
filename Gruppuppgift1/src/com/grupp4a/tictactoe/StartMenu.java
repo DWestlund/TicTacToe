@@ -8,6 +8,7 @@ public class StartMenu {
 
 	public static void startMenu() {
 		Scanner scanner = new Scanner(System.in);
+		boolean computer = false;
 
 		while (true) {
 			System.out.print("    Tic Tac Toe \n" + "[1] Spelare VS Spelare" + "\n[2] Spelare VS Dator "
@@ -18,10 +19,14 @@ public class StartMenu {
 				switch (answer) {
 
 				case 1:
-					Main.initializeGame();
+					Main.initializeGame(computer);
 					Main.runGame(scanner);
 					break;
-				// case 2: PlayerVSComputer; break;
+				case 2:
+					computer = true;
+					Main.initializeGame(computer);
+					Main.runGame(scanner);
+					break;
 				case 3:
 					howToPlay(scanner);
 					break;
@@ -31,6 +36,7 @@ public class StartMenu {
 					break;
 				default:
 					System.out.println("Välj ett val ur menyn...");
+					scanner.nextInt();
 					break;
 
 				}
@@ -39,9 +45,9 @@ public class StartMenu {
 			} catch (InputMismatchException e) {
 				System.out.println("Menyn besår endast av siffror...\n");
 				scanner.nextLine();
-			} 
+			}
 		}
-		
+
 	}
 
 	private static void howToPlay(Scanner scanner) {
