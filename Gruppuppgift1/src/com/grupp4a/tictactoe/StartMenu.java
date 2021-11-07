@@ -35,13 +35,8 @@ public class StartMenu {
 					System.exit(0);
 					break;
 				default:
-					System.out.println("Välj ett val ur menyn...");
-					scanner.nextInt();
-					break;
-
+					System.out.println("Välj ett val ur menyn...\n");
 				}
-				scanner.close();
-				break;
 			} catch (InputMismatchException e) {
 				System.out.println("Menyn besår endast av siffror...\n");
 				scanner.nextLine();
