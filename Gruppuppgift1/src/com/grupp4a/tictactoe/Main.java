@@ -76,17 +76,18 @@ public class Main {
 			if (winner == null) {
 				boolean moveOK = board.addPlayerMove(board, selectedPlayer);
 				board.printBoard(board);
-				if (moveOK)
+				if (moveOK) {
 					winner = board.checkWinner(selectedPlayer);
-
-				setNewPlayerTurn();
+					setNewPlayerTurn();
+				}
+							
 			} else if (currentBestOf < decidedBestOf) {
 				System.out.println(winner.getName() + " är vinnare!\n");
 				winner.setScore(winner.getScore() + 1);
 
 				currentBestOf++;
 
-				System.out.println("Poäng:\n" + playerOne.getName() + "| " + playerOne.getScore() + "  -  "
+				System.out.println("        Poäng\n" + playerOne.getName() + "| " + playerOne.getScore() + "  -  "
 						+ playerTwo.getScore() + " |" + playerTwo.getName());
 
 				try {
