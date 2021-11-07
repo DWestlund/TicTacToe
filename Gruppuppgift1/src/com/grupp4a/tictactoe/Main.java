@@ -14,24 +14,25 @@ public class Main {
 	public static int decidedBestOf;
 	public static PlayerMap selectedPlayer;
 	static GameBoard board;
+	
+	public static int playedMatches = 0;
 
 	public static void main(String[] args) {
 		StartMenu.startMenu();
 	}
 
 	public static void initializeGame(boolean computer) {
-		// TODO Fel-hantering.
-		// TODO skapa en snyggare Menu än detta.
-		// TODO fundering.. Att välja så man kan spela mot en 'Dator' också?
-
 		board = newGameBoard();
-
+		
+		if(playedMatches >= 1)
+			scanner.nextLine();
+			
 		System.out.println("Välkommen till TicTacToe skapat av Grupp-4A.");
 		System.out.print("Vänligen ange namn på Spelare 1: ");
 		String playerNameA = scanner.nextLine();
 		String playerNameB = null;
+		
 		if (computer == true) {
-
 			playerNameB = "Computer";
 		} else if (computer == false) {
 			System.out.print("Vänligen ange namn på Spelare 2: ");
@@ -72,7 +73,6 @@ public class Main {
 		PlayerMap playerOne = player.getPlayers().get(0);
 		PlayerMap playerTwo = player.getPlayers().get(1);
 		do {
-
 			if (winner == null) {
 				boolean moveOK = board.addPlayerMove(board, selectedPlayer);
 				board.printBoard(board);
@@ -98,7 +98,7 @@ public class Main {
 
 				System.out.println("\nRunda: " + currentBestOf + " av " + decidedBestOf + "\n");
 				winner = null;
-
+				playedMatches = playedMatches + 1;
 				board = newGameBoard();
 				board.printBoard(board);
 			}

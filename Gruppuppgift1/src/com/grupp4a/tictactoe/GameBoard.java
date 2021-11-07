@@ -184,7 +184,6 @@ public class GameBoard {
 		}
 		if (boardArray[2][0] == 'O' && boardArray[1][1] == 'O' && boardArray[0][2] == 'O') {
 			hasWon = true;
-			// TODO kontrolera sant/falskt, oavgjort samt poängräknare
 		}
 		if (hasWon) {
 			winnerPlayer = selectedPlayer;
@@ -199,7 +198,6 @@ public class GameBoard {
 			Main.board.printBoard(Main.board);
 
 		}
-		return winnerPlayer;// Behövs det läggas till en boolean winner i PlayerMap? Isf kan man sätta den
-		// till true om den vunnit
+		return winnerPlayer;
 	}
 }

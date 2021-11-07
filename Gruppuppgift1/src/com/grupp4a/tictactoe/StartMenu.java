@@ -88,7 +88,6 @@ public class StartMenu {
 				System.out.println(" Inte ett giltigt svar");
 			}
 			answer = scanner.next().toLowerCase();
-
 		}
 	}
 

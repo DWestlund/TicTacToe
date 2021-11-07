@@ -42,11 +42,9 @@ public class Computer {
 	public static boolean find(String playedNr, String compNr) { // Kollar så att rutan datorn vill välja är ledig
 
 		if (playedNr.contains(compNr)) {
-
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 }
